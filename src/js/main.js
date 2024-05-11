@@ -1,5 +1,5 @@
 "use strict";
-
+const ulList = document.querySelector(".js_person");
 let personData = [];
 
 const getData = () => {
@@ -17,9 +17,11 @@ const getData = () => {
         //añadir persona filtrada al array final
         personData.push(personaFiltrada);
       }
+
       console.log(personData);
     });
 };
+
 //limpiar un elemento de la api
 const clearData = (person) => {
   const name = person.name.first + person.name.last;
@@ -38,4 +40,14 @@ const clearData = (person) => {
   return personaFiltrada;
 };
 
+const renderOnePerson = (person) => {
+  let html = "";
+  return html;
+};
+const renderAllPerson = (allPerson) => {
+  ulList.innerHTML = "";
+  for (let i = 0; i < allPerson.length; i++) {
+    ulList.innerHTML += renderOnePerson(allPerson[i]);
+  }
+};
 getData();
