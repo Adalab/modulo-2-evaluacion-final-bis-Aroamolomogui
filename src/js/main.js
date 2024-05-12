@@ -1,6 +1,24 @@
 "use strict";
 const ulList = document.querySelector(".js_person");
+const btnKeep = document.querySelector(".js_keep");
+const btnRecover = document.querySelector(".js_recover");
 let personData = [];
+//guardar datos en localStorage//
+const handleBtnKeep = () => {
+  localStorage.setItem("persons", JSON.stringify(personData));
+};
+const handleBtnRecover = () => {
+  // const personDataLocal = JSON.parse(localStorage.getItem("persons"));
+  // if (personDataLocal !== null) {
+  //   personData = personDataLocal;
+  // }
+  // renderAllPerson(personData);
+  personData = JSON.parse(localStorage.getItem("persons"));
+  renderAllPerson(personData);
+};
+
+btnKeep.addEventListener("click", handleBtnKeep);
+btnRecover.addEventListener("click", handleBtnRecover);
 
 const getData = () => {
   //traer datps api
@@ -45,12 +63,23 @@ const clearData = (person, id) => {
 };
 // En esta constante he pintado 1º una tarjeta en HTML y lo he traido al JS con la constante let html entre comillas francesas por ques e un string
 const renderOnePerson = (person) => {
-  let html = ` <li class="card js_card_person" id="${person.id}">
+  let html = "";
+
+  if (person.friend === false) {
+    html = ` <li class="card js_card_person" id="${person.id}">
   <img src="${person.img}" alt="image" />
   <h1>${person.name}</h1>
   <h2>${person.location}</h2>
   <h2>${person.userName}</h2>
 </li>`;
+  } else {
+    html = ` <li class="card-pink js_card_person" id="${person.id}">
+  <img src="${person.img}" alt="image" />
+  <h1>${person.name}</h1>
+  <h2>${person.location}</h2>
+  <h2>${person.userName}</h2>
+</li>`;
+  }
 
   return html;
 };
@@ -74,6 +103,13 @@ const addFavoriteFriend = (ev) => {
   //con este current lo que hago es traerme el valor de un id para poder saber sobre quién estoy clicando el id lo creo a mano por que no me convence el de la API//
   console.log("Qué tiene el current");
   console.log(ev.currentTarget.id);
+  const person = personData[ev.currentTarget.id];
+  if (person.friend === true) {
+    person.friend = false;
+  } else {
+    person.friend = true;
+  }
+  renderAllPerson(personData);
 };
 
 getData();
