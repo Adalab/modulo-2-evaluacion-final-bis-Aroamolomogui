@@ -48,7 +48,7 @@ const clearData = (person, id) => {
   const name = person.name.first + person.name.last;
   const location = person.location.city;
   const userName = person.login.userName;
-  const img = person.picture.medium;
+  const img = person.picture.large;
 
   const personaFiltrada = {
     id: id,
@@ -66,19 +66,20 @@ const renderOnePerson = (person) => {
   let html = "";
 
   if (person.friend === false) {
-    html = ` <li class="card js_card_person" id="${person.id}">
+    html = ` <li class="card js_card_person" id="${person.id}"><div class="center">
   <img src="${person.img}" alt="image" />
   <h1>${person.name}</h1>
-  <h2>${person.location}</h2>
-  <h2>${person.userName}</h2>
+  <h4>${person.location}</h4>
+  <h4>${person.userName}</h4>
+  </div>
 </li>`;
   } else {
-    html = ` <li class="card-pink js_card_person" id="${person.id}">
-  <img src="${person.img}" alt="image" />
-  <h1>${person.name}</h1>
-  <h2>${person.location}</h2>
-  <h2>${person.userName}</h2>
-</li>`;
+    html = ` <li class="card-pink js_card_person" id="${person.id}"><div class="center">
+    <img src="${person.img}" alt="image" />
+    <h1>${person.name}</h1>
+    <h4>${person.location}</h4>
+    <h4>${person.userName}</h4> </div>
+  </li>`;
   }
 
   return html;
