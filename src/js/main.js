@@ -47,14 +47,14 @@ const getData = () => {
 const clearData = (person, id) => {
   const name = person.name.first + person.name.last;
   const location = person.location.city;
-  const userName = person.login.userName;
+  const userName = person.login.username;
   const img = person.picture.large;
 
   const personaFiltrada = {
     id: id,
     name: name,
     location: location,
-    c: userName,
+    userName: userName,
     img: img,
     friend: false,
   };
